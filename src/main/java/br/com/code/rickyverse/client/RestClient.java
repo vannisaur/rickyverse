@@ -1,31 +1,30 @@
 package br.com.code.rickyverse.client;
 
 import br.com.code.rickyverse.models.Resources;
+import br.com.code.rickyverse.service.ConvertData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-
 @Service
 public class RestClient {
 
     private final WebClient webClient;
+    @Autowired
+    private ConvertData convertData;
 
     public RestClient(WebClient webClient) {
         this.webClient = webClient;
     }
 
 
-    public Mono<String> getData() {
+    public Mono<Resources> getData() {
         return webClient.get()
                 .uri("https://rickandmortyapi.com/api")
                 .retrieve()
-                .bodyToMono(String.class);
+                .bodyToMono(String.class)
+                .map(convertData::convertJsonToResources);
     }
 
     public Mono<String> postData(Object data) {
@@ -35,4 +34,5 @@ public class RestClient {
                 .retrieve()
                 .bodyToMono(String.class);
     }
+
 }

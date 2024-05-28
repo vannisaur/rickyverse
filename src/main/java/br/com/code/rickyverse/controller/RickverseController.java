@@ -1,6 +1,7 @@
 package br.com.code.rickyverse.controller;
 
 import br.com.code.rickyverse.client.RestClient;
+import br.com.code.rickyverse.models.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -17,12 +18,12 @@ public class RickverseController {
     }
 
     @GetMapping("/resources")
-    public Mono<String> getExternalData() {
+    public Mono<Resources> getResources() {
         return apiService.getData();
     }
 
-/*    @PostMapping("/data")
+    @PostMapping("/data")
     public Mono<String> postExternalData(@RequestBody Object data) {
         return apiService.postData(data);
-    }*/
+    }
 }
