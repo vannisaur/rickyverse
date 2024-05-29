@@ -7,7 +7,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 
 @Configuration
-public class RickverseConfig {
+public class RickyverseConfig {
 
     @Bean
     public WebClient webClient() {
